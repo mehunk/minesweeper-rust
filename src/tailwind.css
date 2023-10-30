@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+    .border-inside {
+        @apply border-[3px] border-solid border-t-[#7b7b7b] border-r-[#fff] border-b-[#fff] border-l-[#7b7b7b]
+    }
+
+    .border-outside {
+        @apply border-[3px] border-solid border-t-[#fff] border-r-[#7b7b7b] border-b-[#7b7b7b] border-l-[#fff]
+    }
+
+    .dynamic-image {
+        @apply bg-cover bg-[image:var(--image-url)]
+    }
+}
