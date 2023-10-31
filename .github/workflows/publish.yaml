@@ -1,0 +1,35 @@
+name: Frontend Publish
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    name: Publish to Cloudflare Pages
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install WebAssembly target
+        run: rustup target add wasm32-unknown-unknown
+      - name: Install Trunk
+        uses: jetli/trunk-action@v0.4.0
+        with:
+          version: 'latest'
+      - name: Build
+        run: trunk build --release
+      - name: Publish to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: c603b90c5fabd3b317c7a286478543ea
+          projectName: minesweeper-rust
+          directory: ./dist
