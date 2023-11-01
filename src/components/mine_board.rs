@@ -1,20 +1,17 @@
 use yew::prelude::*;
 
-use crate::components::mine_tile::MineTile;
+use crate::utils::MineTile;
+use crate::components::mine_tile::{MineTile as MineTileComponent};
 
 #[function_component]
 pub fn MineBoard() -> Html {
-    let mut tiles: Vec<usize> = Vec::with_capacity(81);
-
-    for i in 0..81 {
-        tiles.push(i);
-    }
+    let mine_tiles = use_context::<Vec<MineTile>>().expect("ctx not found");
 
     html! {
         <div class="border-[3px] border-inside grid grid-cols-9">
-            {tiles.iter().map(|index| {
+            {mine_tiles.iter().enumerate().map(|(index, _)| {
                 html! {
-                    <MineTile key={*index} />
+                    <MineTileComponent key={index} />
                 }
             }).collect::<Html>()}
         </div>
