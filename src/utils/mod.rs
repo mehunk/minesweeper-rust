@@ -1,19 +1,19 @@
 use rand::Rng;
 use std::collections::HashSet;
 
-#[derive(PartialEq, Clone)]
-enum MineStatus {
+#[derive(PartialEq, Debug, Clone)]
+pub enum MineStatus {
     HIDDEN,
     FLAGGED,
     QUESTION,
     REVEALED,
 }
 
-#[derive(PartialEq, Clone)]
+#[derive(PartialEq, Debug, Clone)]
 pub struct MineTile {
-    is_mine: bool,
-    mine_count: isize,
-    status: MineStatus,
+    pub is_mine: bool,
+    pub mine_count: isize,
+    pub status: MineStatus,
 }
 
 pub fn get_mine_set(row_count: usize, col_count: usize, mine_count: usize) -> HashSet<usize> {
@@ -90,7 +90,7 @@ pub fn calculate_mine_count (mine_tiles: &Vec<MineTile>, index: usize) -> isize 
 pub fn reveal_hidden_tile (mine_tiles: &mut Vec<MineTile>, index: usize) -> () {
     let x = index % 9;
     let y = index / 9;
-    let mut mine_tile = &mine_tiles[index];
+    let mine_tile = &mine_tiles[index];
     if mine_tile.status != MineStatus::HIDDEN || mine_tile.is_mine {
         return;
     }
