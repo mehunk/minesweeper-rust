@@ -2,11 +2,14 @@ use yew::prelude::*;
 
 use crate::components::digit_screen::DigitScreen;
 
-#[function_component]
-pub fn FlagCountPanel() -> Html {
-    let digit = 12;
+#[derive(Properties, PartialEq, Debug)]
+pub struct Props {
+    pub flag_count: usize
+}
 
+#[function_component]
+pub fn FlagCountPanel(Props { flag_count }: &Props) -> Html {
     html! {
-        <DigitScreen digit={digit} width={3} />
+        <DigitScreen digit={flag_count} width={3} />
     }
 }

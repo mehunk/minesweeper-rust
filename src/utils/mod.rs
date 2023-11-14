@@ -100,7 +100,7 @@ pub fn reveal_hidden_tile (mine_tiles: &mut Vec<MineTile>, index: usize) -> () {
     }
     for dy in -1..=1 {
         for dx in -1..=1 {
-            if dx == 0 || dy == 0 {
+            if dx == 0 && dy == 0 {
                 continue;
             }
             let x2 = x as isize + dx;

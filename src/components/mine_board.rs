@@ -1,7 +1,7 @@
 use yew::prelude::*;
 
 use crate::context::mine_context::MineContext;
-use crate::components::mine_tile::{MineTile as MineTileComponent};
+use crate::components::mine_tile::MineTile;
 
 #[function_component]
 pub fn MineBoard() -> Html {
@@ -13,7 +13,7 @@ pub fn MineBoard() -> Html {
             {mine_tiles.iter().enumerate().map(|(index, _)| {
                 let mine_tile = mine_tiles[index].clone();
                 html! {
-                    <MineTileComponent
+                    <MineTile
                         key={index}
                         index={index}
                         status={mine_tile.status}
